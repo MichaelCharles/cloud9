@@ -1,0 +1,14 @@
+version: '3'
+services:
+  c9:
+    container_name: c9u01
+    build: 
+      context: './c9'
+      dockerfile: 'php7.2-apache/Dockerfile'
+    ports:
+      - 80:80
+      - 9000:8080
+    environment:
+      C9_WORKSPACE: '/var/www/html'
+    volumes:
+      - ./workspace:/var/www/html
