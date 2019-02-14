@@ -100,7 +100,7 @@ ADD ./default.conf /etc/apache2/sites-available/000-default.conf
 
 # ------------------------------------------------------------------------------
 # Expose ports and add entrypoint.
-ADD start.sh /start.sh
+ADD start.sh /php7.1.2-apache-student/start.sh
 RUN sudo dos2unix /start.sh
 RUN sudo chmod 777 /start.sh
 RUN sudo chmod +x /start.sh
@@ -111,3 +111,5 @@ ENTRYPOINT ["/start.sh"]
 
 # Clean up.
 RUN rm -rf /var/lib/apt/lists/*
+
+USER student
