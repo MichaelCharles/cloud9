@@ -3,9 +3,9 @@ if [ -z $C9_WORKSPACE ]
 then
     export C9_WORKSPACE=$WORKSPACE
 fi
-if [ -n $C9_PASSWORD ]
+if [ -z $C9_PASSWORD ]
 then
-    export C9_PASS=$C9_PASSWORD
+    export C9_PASSWORD=$C9_PASS
 fi
 sudo a2enmod rewrite
 sudo service apache2 start

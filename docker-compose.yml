@@ -10,5 +10,7 @@ services:
       - 9000:8080
     environment:
       C9_WORKSPACE: '/var/www/html'
+      C9_USER: 'michael'
+      C9_PASS: 's2akita'
     volumes:
       - ./workspace:/var/www/html
