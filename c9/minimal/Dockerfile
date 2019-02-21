@@ -68,10 +68,6 @@ COPY overrides.less /cloud9/plugins/c9.ide.theme.jett/less/overrides.less
 RUN echo 'div[title="John Doe"] {display: none;}' >> /cloud9/plugins/c9.ide.layout.classic/loading.css
 RUN echo 'div[title="John Doe"] {display: none;}' >> /cloud9/plugins/c9.ide.layout.classic/loading-flat.css
 
-
-# Extra stuff would go here.
-# Extra stuff would stop here. 
-
 # ------------------------------------------------------------------------------
 # Expose ports and add entrypoint.
 ADD start.sh /start.sh
@@ -81,7 +77,6 @@ RUN sudo chmod +x /start.sh
 RUN sudo echo 'export PATH=$PATH:/usr/local/bin:~/.composer/vendor/bin:/cloud9/bin' >> /root/.bashrc
 EXPOSE 8080 22 443 3306 5432
 ENTRYPOINT ["/start.sh"]
-
 
 # Clean up.
 RUN rm -rf /var/lib/apt/lists/*
