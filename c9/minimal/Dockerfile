@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 RUN apt-get update \
-    && apt-get install sudo curl wget gnupg -y
+    && apt-get install sudo apache2 curl wget gnupg unzip vim zip elinks git -y
 RUN useradd -ms /bin/bash student
 RUN usermod -a -G sudo student
 RUN echo 'student ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
@@ -56,6 +56,8 @@ WORKDIR /cloud9
 
 # Custom Cloud9 settings
 COPY ./user.settings /root/.c9/user.settings
+ADD project.settings /cloud9/project.settings
+RUN sudo chmod -R 777 /cloud9/project.settings
 RUN sudo chmod -R 777 /root/.c9/user.settings
 
 # Custom themes for Cloud9
@@ -67,6 +69,13 @@ RUN sudo rm -rf /cloud9/plugins/c9.ide.theme.jett/less/overrides.less
 COPY overrides.less /cloud9/plugins/c9.ide.theme.jett/less/overrides.less
 RUN echo 'div[title="John Doe"] {display: none;}' >> /cloud9/plugins/c9.ide.layout.classic/loading.css
 RUN echo 'div[title="John Doe"] {display: none;}' >> /cloud9/plugins/c9.ide.layout.classic/loading-flat.css
+
+
+#Install PHP Coding Standards Fixer
+RUN curl -L https://cs.symfony.com/download/php-cs-fixer-v2.phar -o php-cs-fixer
+RUN sudo chmod a+x php-cs-fixer
+RUN sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
+RUN echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 
 # ------------------------------------------------------------------------------
 # Expose ports and add entrypoint.
